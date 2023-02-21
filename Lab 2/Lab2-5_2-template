@@ -1,0 +1,16 @@
+		;		Calling program
+Num1		DCD		0x20			; 32
+Num2		DCD		0x14			; 20
+Result	DCD		0
+		ADR		SP, 0xFFFFFFFC	; Initialise stack pointer(SP) to top of memory
+		MOV		R0, #0x100	; (a) Move start address of memory block into R0
+		BL		Mean			; Call subroutine Mean
+		END		; Stop emulation
+		
+		;		Subroutine Mean
+Mean		LDR		R1, [R0]		; (b) Load value in Num1 into R1
+		LDR		R2, [R0, #4]	; (c) Load Num2 in R2
+		ADD		R1, R1, R2	; Add R2 to R1
+		ASR		R1, R1, #1	; Divide by 2 using arithmetic shift right
+		STR		R1, [R0, #8]	; (d) Move result in R1 into memory variable Result
+		MOV		PC, LR		; Return to calling program

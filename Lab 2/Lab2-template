@@ -1,0 +1,18 @@
+		;		Calling program
+Num1		DCD		0x20
+Num2		DCD		0x14
+Result	DCD		0
+		ADR		R0, Num1
+		ADR		R1, Num2
+		ADR		R2, Result	; Setup registers with value
+		ADR		SP, 0xFFFFFFFC	; Initialise stack pointer(SP) to top of memory
+		LDR		R0, [R0]		; Move value of Num1 stored at 0x100 into R0
+		LDR		R1, [R1]		; Move value of Num2 stored at 0x104 into R1
+		BL		Mean			; Call subroutine Mean
+		STR		R1, [R2]		; Move result of mean to memory var at 0x108
+		END		; Stop emulation
+		
+		;		Subroutine Mean
+Mean		ADD		R1, R0, R1	; Add the two parameters in R0 and R1
+		ASR		R1, R1, #1	; Divide-by-2 using arithmetic shift right by 1 bit
+		MOV		PC, LR		; Return to calling program
