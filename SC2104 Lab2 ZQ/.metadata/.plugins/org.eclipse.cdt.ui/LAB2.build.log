@@ -1,0 +1,65 @@
+17:10:05 **** Incremental Build of configuration Debug for project LAB2 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:20: warning: implicit declaration of function 'IMU_Initialise' [-Wimplicit-function-declaration]
+  102 |   uint8_t status = IMU_Initialise(&imu, &hi2c2, &huart3);
+      |                    ^~~~~~~~~~~~~~
+../Core/Src/main.c:110:4: warning: implicit declaration of function 'IMU_AccelRead' [-Wimplicit-function-declaration]
+  110 |    IMU_AccelRead(&imu);
+      |    ^~~~~~~~~~~~~
+../Core/Src/main.c:120:4: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  120 |    sprintf(sbuf, "%5.2f, ", pitchAcc);
+      |    ^~~~~~~
+../Core/Src/main.c:120:4: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Core/Src/main.c:26:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+   25 | #include "math.h"
+  +++ |+#include <stdio.h>
+   26 | /* USER CODE END Includes */
+../Core/Src/main.c:122:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  122 |    HAL_UART_Transmit(&huart3, sbuf, 8, HAL_MAX_DELAY);
+      |                               ^~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:127:31: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  127 |    HAL_UART_Transmit(&huart3, sbuf, 8, HAL_MAX_DELAY);
+      |                               ^~~~
+      |                               |
+      |                               char *
+In file included from ../Core/Inc/stm32f4xx_hal_conf.h:407,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:722:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
+  722 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/main.c:102:11: warning: unused variable 'status' [-Wunused-variable]
+  102 |   uint8_t status = IMU_Initialise(&imu, &hi2c2, &huart3);
+      |           ^~~~~~
+../Core/Src/main.c:74:8: warning: variable 'dt' set but not used [-Wunused-but-set-variable]
+   74 |  float dt;// time elapse
+      |        ^~
+../Core/Src/main.c:76:18: warning: 'millisOld' is used uninitialized in this function [-Wuninitialized]
+   76 |  dt = (millisNow - millisOld)*0.001; // time elapsed in millisecond
+      |       ~~~~~~~~~~~^~~~~~~~~~~~
+arm-none-eabi-gcc -o "LAB2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\Zai Qin\Desktop\SC2104 Lab2 ZQ\LAB2\STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LAB2.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LAB2.elf
+ 
+arm-none-eabi-size   LAB2.elf 
+arm-none-eabi-objdump -h -S  LAB2.elf  > "LAB2.list"
+   text	   data	    bss	    dec	    hex	filename
+  30668	    488	   1784	  32940	   80ac	LAB2.elf
+Finished building: default.size.stdout
+ 
+Finished building: LAB2.list
+ 
+
+17:10:06 Build Finished. 0 errors, 9 warnings. (took 1s.21ms)
+
