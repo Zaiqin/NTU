@@ -1,0 +1,33 @@
+package mypackage;
+import java.net.*;
+
+public class Rfc865UdpServer { 
+	
+	public static void main(String[] argv) { 
+		
+		//
+		// 1. Open UDP socket at well-known port 
+		//
+		static DatagramSocket socket; 
+		try {
+			socket = new DatagramSocket(17); // QOTD Port is 17
+		} catch (SocketException e) {}
+		
+		while (true) {
+			try {
+				
+				//
+				// 2. Listen for UDP request from client 
+				//
+				DatagramPacket request = new DatagramPacket(buf, buf.length); 
+				socket.receive(request); ...
+				//
+				// 3. Send UDP reply to client 
+				//
+				DatagramPacket reply = new ...; 
+				socket.send(reply);
+				
+			} catch (IOException e) {} 
+		} 
+	}
+}

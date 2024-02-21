@@ -1,0 +1,32 @@
+package mypackage;
+
+public class Rfc865UdpServer { 
+	
+	public static void main(String[] argv) { 
+		
+		//
+		// 1. Open UDP socket at well-known port 
+		//
+		static DatagramSocket socket; 
+		try {
+			socket = new DatagramSocket(...; 
+		} catch (SocketException e) {}
+		
+		while (true) { 
+			try {
+				
+				//
+				// 2. Listen for UDP request from client 
+				//
+				DatagramPacket request = new ...; 
+				socket.receive(request); ...
+				//
+				// 3. Send UDP reply to client 
+				//
+				DatagramPacket reply = new ...; 
+				socket.send(reply);
+				
+			} catch (IOException e) {} 
+		} 
+	}
+}
